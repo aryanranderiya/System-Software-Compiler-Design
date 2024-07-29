@@ -1,4 +1,5 @@
 int main ( ) {
-    int a , b ;
-    int 1_a , b_ ;
+    int a = 10 , 1_a , b_ ;
+    "aryan"
+    12345
 }

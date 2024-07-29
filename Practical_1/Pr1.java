@@ -1,6 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 class Pr1 {
 
@@ -27,12 +26,64 @@ class Pr1 {
     // Method to check if a word is a keyword
     public static boolean linearSearchKeyword(String word) {
         // List of keywords
-        String[] keywords = { "int", "(", ")", ";", "\n", "\t", "{", "}", " ", ","};
+        String[] keywords = { "int", "(", ")", ";", "\n", "\t", "{", "}", " ", "," };
         for (String keyword : keywords) {
             if (keyword.equals(word))
                 return true;
         }
         return false;
+    }
+
+    public static boolean checkOperator(String word) {
+        // List of operators
+        String[] arithmetic_ops = { "+", "-", "*", "%", "/" };
+        String[] logical_ops = { "&&", "!", "||"};
+        String[] assignment_ops = { "=", "<=", ">=", "==", "+=", "-=", "*=", "/="};
+
+        for (String operator : arithmetic_ops) {
+            if (operator.equals(word)) {
+                System.out.println(word + " is an arithmetic operator");
+                return true;
+            }
+        }
+
+        for (String operator : logical_ops) {
+            if (operator.equals(word)) {
+                System.out.println(word + " is a logical operator");
+                return true;
+            }
+        }
+
+        for (String operator : assignment_ops) {
+            if (operator.equals(word)) {
+                System.out.println(word + " is an assignment operator");
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean checkIsNumber(String string) {
+        for (int index = 0; index < string.length(); index++) {
+            char letter = string.charAt(index);
+            if (!(Character.isDigit(letter)))
+                return false;
+        }
+        return true;
+    }
+
+    public static boolean checkIsLiteral(String string) {
+        int length = string.length();
+
+        for (int index = 0; index < string.length(); index++) {
+            char letter = string.charAt(index);
+
+            if (index == 0 || index == (length - 1))
+                if (!Objects.equals(letter, '"'))
+                    return false;
+        }
+        return true;
     }
 
     public static void main(String[] args) {
@@ -48,11 +99,18 @@ class Pr1 {
                 // Split the line into words
                 String[] words = fileData.split(" ");
                 for (String word : words) {
-
                     // Check if the word is a keyword
                     if (linearSearchKeyword(word))
                         System.out.println(word + " is a keyword");
 
+                    else if (checkIsNumber(word))
+                        System.out.println(word + " is a number");
+
+                    else if (checkIsLiteral(word))
+                        System.out.println(word + " is a string literal");
+
+                    else if (checkOperator(word))
+                        break;
                     // Check if the word is an identifier
                     else if (checkIdentifier(word))
                         System.out.println(word + " is an identifier");
