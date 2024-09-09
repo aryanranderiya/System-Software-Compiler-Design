@@ -8,6 +8,7 @@ import java.util.Scanner;
 class RecursiveDescent{
     static int i=0;
     static char[] inputArray;
+    
     public static int S(){
         if(inputArray[i]=='a'){
             i++;

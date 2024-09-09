@@ -4,7 +4,8 @@
 %}
 
 %%
-\<[^\>]+\>        { fprintf(yyout, "HTML Tag: %s\n", yytext); } 
+
+\<([a-zA-Z]+)\>\s*[^<]\s*\<\/[a-zA-Z]+>        { fprintf(yyout, "HTML Tag: %s\n", yytext); } 
 %%
 
 int main()
